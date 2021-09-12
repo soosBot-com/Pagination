@@ -17,5 +17,5 @@
     ````
 4) Start the pagenation
     ```py
-    await Pagination.ButtonPagination().start(ctx, pages=embeds)
+    await Paginator.Simple().start(ctx, pages=embeds)
     ```
