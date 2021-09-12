@@ -3,15 +3,13 @@
 #
 
 # How to use
-1) Create a file called Pagination.py in your code. [It would be better if you made a .utils folder in your cogs, and created it in there.]
-
-2) Import it into your code
+1) Install the library
     ```py
-    import Pagination
+    pip install discord.py-pagination
     ```
-    If you are using this as a utils file, import it like this
+2) Import it
     ```py
-    from .utils import Pagination
+    import Paginator
     ```
 3) Create a list of embeds to paginate
     ```py
