@@ -1,8 +1,12 @@
 import discord
 from discord.ext import commands
 
+embeds = [discord.Embed(title="First embed"),
+          discord.Embed(title="Second embed"),
+          discord.Embed(title="Third embed")]
 
-class ButtonPagination(discord.ui.View):
+
+class Simple(discord.ui.View):
     """
     Embed Paginator.
 
@@ -49,9 +53,9 @@ class ButtonPagination(discord.ui.View):
         self.PreviousButton.callback = self.previous_button_callback
         self.NextButton.callback = self.next_button_callback
 
-        self.page_counter = PageCount(style=self.PageCounterStyle,
-                                      TotalPages=self.total_page_count,
-                                      InitialPage=self.InitialPage)
+        self.page_counter = SimplePaginatorPageCounter(style=self.PageCounterStyle,
+                                                       TotalPages=self.total_page_count,
+                                                       InitialPage=self.InitialPage)
 
         self.add_item(self.PreviousButton)
         self.add_item(self.page_counter)
@@ -92,6 +96,6 @@ class ButtonPagination(discord.ui.View):
         await self.previous()
 
 
-class PageCount(discord.ui.Button):
+class SimplePaginatorPageCounter(discord.ui.Button):
     def __init__(self, style: discord.ButtonStyle, TotalPages, InitialPage):
         super().__init__(label=f"{InitialPage + 1}/{TotalPages}", style=style, disabled=True)
