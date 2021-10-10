@@ -1,10 +1,6 @@
 import discord
 from discord.ext import commands
 
-embeds = [discord.Embed(title="First embed"),
-          discord.Embed(title="Second embed"),
-          discord.Embed(title="Third embed")]
-
 
 class Simple(discord.ui.View):
     """
@@ -86,7 +82,7 @@ class Simple(discord.ui.View):
             embed = discord.Embed(description="You cannot control this pagination because you did not execute it.",
                                   color=discord.Colour.red())
             return await interaction.response.send_message(embed=embed, ephemeral=True)
-        await self.previous()
+        await self.next()
 
     async def previous_button_callback(self, interaction: discord.Interaction):
         if interaction.user != self.ctx.author:

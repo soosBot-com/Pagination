@@ -142,4 +142,8 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+
+# Pycharm
+.idea
+
 # End of https://www.toptal.com/developers/gitignore/api/python
