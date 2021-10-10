@@ -27,7 +27,7 @@ embeds = [discord.Embed(title="First embed"),
 await Paginator.Simple().start(ctx, pages=embeds)
 ```
 
-### Advanceds
+### Advanced
 
 ##### To use custom buttons, pass in the corresponding argument when you initiate the paginator.
 
