@@ -1,14 +1,12 @@
-
-
 # discord.py-pagination
 
-discord.py-pagination is a Python library to easily create embed paginators.
+#### discord.py-pagination is a Python library to easily create embed paginators.
 
-<img src="https://cdn.soosbot.com/images/pagination-requirement.svg">
+<img src="https://cdn.soosbot.com/images/pagination-requirement.svg" alt="WARNING IMAGE NOT FOUND">
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install the library.
 
 ```bash
 pip install discord.py-pagination
@@ -29,6 +27,26 @@ embeds = [discord.Embed(title="First embed"),
 await Paginator.Simple().start(ctx, pages=embeds)
 ```
 
+### Advanceds
+
+##### To use custom buttons, pass in the corresponding argument when you initiate the paginator.
+
+```python
+# These arguments override the default ones.
+
+PreviousButton = discord.ui.Button(...)
+NextButton = discord.ui.Button(...)
+PageCounterStyle = discord.ui.ButtonStyle(...) # Only accepts ButtonStyle instead Button
+InitialPage = 0 # Page to start the paginator on.
+timeout = 42069 # Seconds to timeout. Default is 60
+
+await Paginator.Simple(
+    PreviousButton=PreviousButton,
+    NextButton=NextButton,
+    PageCounterStyle=PageCounterStyle,
+    InitialPage=InitialPage,
+    timeout=timeout).start(ctx, pages=embeds)
+```
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
