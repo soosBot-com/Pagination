@@ -83,6 +83,7 @@ class Simple(discord.ui.View):
                                   color=discord.Colour.red())
             return await interaction.response.send_message(embed=embed, ephemeral=True)
         await self.next()
+        await interaction.response.defer()
 
     async def previous_button_callback(self, interaction: discord.Interaction):
         if interaction.user != self.ctx.author:
@@ -90,6 +91,8 @@ class Simple(discord.ui.View):
                                   color=discord.Colour.red())
             return await interaction.response.send_message(embed=embed, ephemeral=True)
         await self.previous()
+        await interaction.response.defer()
+
 
 
 class SimplePaginatorPageCounter(discord.ui.Button):
