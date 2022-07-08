@@ -1,4 +1,5 @@
 import discord
+import typing
 from discord.ext import commands
 
 
@@ -40,7 +41,11 @@ class Simple(discord.ui.View):
 
         super().__init__(timeout=timeout)
 
-    async def start(self, ctx: commands.Context, pages: list[discord.Embed]):
+    async def start(self, ctx: typing.Union[discord.Interaction, commands.Context], pages: list[discord.Embed]):
+        
+        if isinstance(ctx, discord.Interaction):
+            ctx = await commands.Context.from_interaction(ctx)
+
         self.pages = pages
         self.total_page_count = len(pages)
         self.ctx = ctx
