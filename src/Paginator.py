@@ -41,7 +41,7 @@ class Simple(discord.ui.View):
 
         super().__init__(timeout=timeout)
 
-    async def start(self, ctx: typing.Union[discord.Interaction, commands.Context], pages: list[discord.Embed]):
+    async def start(self, ctx: typing.Union[discord.Interaction, commands.Context], pages: list[discord.Embed], **kwargs):
         
         if isinstance(ctx, discord.Interaction):
             ctx = await commands.Context.from_interaction(ctx)
@@ -62,7 +62,7 @@ class Simple(discord.ui.View):
         self.add_item(self.page_counter)
         self.add_item(self.NextButton)
 
-        self.message = await ctx.send(embed=self.pages[self.InitialPage], view=self)
+        self.message = await ctx.send(embed=self.pages[self.InitialPage], view=self, **kwargs)
 
     async def previous(self):
         if self.current_page == 0:
