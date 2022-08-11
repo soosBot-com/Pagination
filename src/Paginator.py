@@ -1,5 +1,6 @@
+from __future__ import annotations
+
 import discord
-import typing
 from discord.ext import commands
 
 
@@ -26,11 +27,13 @@ class Simple(discord.ui.View):
                  PreviousButton: discord.ui.Button = discord.ui.Button(emoji=discord.PartialEmoji(name="\U000025c0")),
                  NextButton: discord.ui.Button = discord.ui.Button(emoji=discord.PartialEmoji(name="\U000025b6")),
                  PageCounterStyle: discord.ButtonStyle = discord.ButtonStyle.grey,
-                 InitialPage: int = 0) -> None:
+                 InitialPage: int = 0,
+                 ephemeral: bool = False) -> None:
         self.PreviousButton = PreviousButton
         self.NextButton = NextButton
         self.PageCounterStyle = PageCounterStyle
         self.InitialPage = InitialPage
+        self.ephemeral = ephemeral
 
         self.pages = None
         self.ctx = None
@@ -41,7 +44,7 @@ class Simple(discord.ui.View):
 
         super().__init__(timeout=timeout)
 
-    async def start(self, ctx: typing.Union[discord.Interaction, commands.Context], pages: list[discord.Embed], **kwargs):
+    async def start(self, ctx: discord.Interaction|commands.Context, pages: list[discord.Embed]):
         
         if isinstance(ctx, discord.Interaction):
             ctx = await commands.Context.from_interaction(ctx)
@@ -62,7 +65,7 @@ class Simple(discord.ui.View):
         self.add_item(self.page_counter)
         self.add_item(self.NextButton)
 
-        self.message = await ctx.send(embed=self.pages[self.InitialPage], view=self, **kwargs)
+        self.message = await ctx.send(embed=self.pages[self.InitialPage], view=self, ephemeral=self.ephemeral)
 
     async def previous(self):
         if self.current_page == 0:
