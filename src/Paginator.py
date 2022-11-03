@@ -20,6 +20,8 @@ class Simple(discord.ui.View):
         Overrides default page counter style.
     InitialPage: int
         Page to start the pagination on.
+    AllowExtInput: bool
+        Overrides ability for 3rd party to interract with button.
     """
 
     def __init__(self, *,
@@ -27,14 +29,15 @@ class Simple(discord.ui.View):
                  PreviousButton: discord.ui.Button = discord.ui.Button(emoji=discord.PartialEmoji(name="\U000025c0")),
                  NextButton: discord.ui.Button = discord.ui.Button(emoji=discord.PartialEmoji(name="\U000025b6")),
                  PageCounterStyle: discord.ButtonStyle = discord.ButtonStyle.grey,
-                 InitialPage: int = 0,
+                 InitialPage: int = 0, AllowExtInput: bool = False,
                  ephemeral: bool = False) -> None:
         self.PreviousButton = PreviousButton
         self.NextButton = NextButton
         self.PageCounterStyle = PageCounterStyle
         self.InitialPage = InitialPage
+        self.AllowExtInput = AllowExtInput
         self.ephemeral = ephemeral
-
+        
         self.pages = None
         self.ctx = None
         self.message = None
@@ -86,7 +89,7 @@ class Simple(discord.ui.View):
         await self.message.edit(embed=self.pages[self.current_page], view=self)
 
     async def next_button_callback(self, interaction: discord.Interaction):
-        if interaction.user != self.ctx.author:
+        if interaction.user != self.ctx.author and self.AllowExtInput:
             embed = discord.Embed(description="You cannot control this pagination because you did not execute it.",
                                   color=discord.Colour.red())
             return await interaction.response.send_message(embed=embed, ephemeral=True)
@@ -94,7 +97,7 @@ class Simple(discord.ui.View):
         await interaction.response.defer()
 
     async def previous_button_callback(self, interaction: discord.Interaction):
-        if interaction.user != self.ctx.author:
+        if interaction.user != self.ctx.author and self.AllowExtInput:
             embed = discord.Embed(description="You cannot control this pagination because you did not execute it.",
                                   color=discord.Colour.red())
             return await interaction.response.send_message(embed=embed, ephemeral=True)
