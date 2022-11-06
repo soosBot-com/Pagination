@@ -29,7 +29,7 @@ await Paginator.Simple().start(ctx, pages=embeds)
 
 ### Advanced
 
-##### To use custom buttons, pass in the corresponding argument when you initiate the paginator.
+##### To use custom buttons, pass in the corresponding argument when you initiate the paginator. **THESE ARE OPTIONAL**
 
 ```python
 # These arguments override the default ones.
@@ -39,13 +39,14 @@ NextButton = discord.ui.Button(...)
 PageCounterStyle = discord.ButtonStyle(...) # Only accepts ButtonStyle instead of Button
 InitialPage = 0 # Page to start the paginator on.
 timeout = 42069 # Seconds to timeout. Default is 60
+ephemeral = true # Defaults to false if not passed in.
 
 await Paginator.Simple(
     PreviousButton=PreviousButton,
     NextButton=NextButton,
     PageCounterStyle=PageCounterStyle,
     InitialPage=InitialPage,
-    timeout=timeout).start(ctx, pages=embeds)
+    timeout=timeout, ephemeral=ephemeral).start(ctx, pages=embeds)
 ```
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
